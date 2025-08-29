@@ -125,6 +125,11 @@ jobs:
           cp "$GITHUB_WORKSPACE/extension.neon" vendor/aazbeltran/laravel-backpack-phpstan-extension/
           cp "$GITHUB_WORKSPACE/bootstrap.php" vendor/aazbeltran/laravel-backpack-phpstan-extension/
           cp -r "$GITHUB_WORKSPACE/stubs" vendor/aazbeltran/laravel-backpack-phpstan-extension/
+          cp "$GITHUB_WORKSPACE/composer.json" vendor/aazbeltran/laravel-backpack-phpstan-extension/
+          
+          # Add our extension to the autoloader
+          composer config repositories.local-extension path vendor/aazbeltran/laravel-backpack-phpstan-extension
+          composer require aazbeltran/laravel-backpack-phpstan-extension:@dev --no-scripts
           
           # Create a test PHPStan config that includes our extension
           echo "parameters:
