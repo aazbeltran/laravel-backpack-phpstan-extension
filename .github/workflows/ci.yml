@@ -44,11 +44,24 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # Remove composer.lock to avoid version conflicts between PHP versions
+          rm -f composer.lock
+          
+          # For PHP 8.1, use compatible versions of dependencies
+          if [[ "${{ matrix.php-version }}" == "8.1" ]]; then
+            # Use older versions compatible with PHP 8.1
+            composer require "phpunit/phpunit:^10.0" --dev --no-update
+            composer require "orchestra/testbench:^8.0" --dev --no-update
+            composer require "laravel/framework:^10.0" --dev --no-update
+            # Explicitly avoid dependencies that require PHP 8.2+
+            composer require "doctrine/dbal:^3.0" --dev --no-update
+          fi
+          
           # Install specific PHPStan version for matrix testing
-          # Allow composer to update composer.lock in the runner to avoid mismatches
           composer require "phpstan/phpstan:${{ matrix.phpstan-version }}" --no-update
-          composer update phpstan/phpstan --with-dependencies
-          composer install --prefer-dist --no-progress
+          
+          # Install all dependencies
+          composer install --prefer-dist --no-progress --no-interaction
 
       - name: Run PHPUnit Tests
         run: vendor/bin/phpunit
