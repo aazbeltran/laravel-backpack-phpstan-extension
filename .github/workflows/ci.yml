@@ -41,7 +41,8 @@ jobs:
       - name: Install dependencies
         run: |
           # Install specific PHPStan version for matrix testing
-          composer require "phpstan/phpstan:${{ matrix.phpstan-version }}" --dev --no-update
+          # Allow composer to update composer.lock in the runner to avoid mismatches
+          composer require "phpstan/phpstan:${{ matrix.phpstan-version }}" --dev
           composer install --prefer-dist --no-progress
 
       - name: Run PHPUnit Tests
