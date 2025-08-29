@@ -4,14 +4,14 @@
  * PHPUnit Bootstrap for Laravel Backpack PHPStan Extension Tests
  */
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 // Set up test environment
 putenv('APP_ENV=testing');
 
 // Initialize PHPStan dependencies for testing
 if (!defined('PHPUNIT_COMPOSER_INSTALL')) {
-    define('PHPUNIT_COMPOSER_INSTALL', __DIR__ . '/../vendor/autoload.php');
+    define('PHPUNIT_COMPOSER_INSTALL', dirname(__DIR__) . '/vendor/autoload.php');
 }
 
 // Helper function for tests

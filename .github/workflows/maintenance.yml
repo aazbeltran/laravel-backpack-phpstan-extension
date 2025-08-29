@@ -75,7 +75,7 @@ jobs:
           cd temp-laravel
           
           # Install our extension
-          composer config repositories.local path ../
+          composer config repositories.local path "$GITHUB_WORKSPACE"
           composer require "aazbeltran/laravel-backpack-phpstan-extension:*" --dev
           
           # Test PHPStan runs
@@ -84,7 +84,7 @@ jobs:
             paths:
               - app
           includes:
-            - vendor/aazbeltran/laravel-backpack-phpstan-extension/extension.neon" > phpstan.neon
+            - $GITHUB_WORKSPACE/extension.neon" > phpstan.neon
           
           vendor/bin/phpstan analyse --error-format=table
 
