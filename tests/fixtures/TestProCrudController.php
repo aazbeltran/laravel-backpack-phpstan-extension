@@ -11,7 +11,7 @@ class TestProCrudController extends CrudController
 {
     use CloneOperation, FetchOperation, InlineCreateOperation;
 
-    public function setup()
+    public function setup(): void
     {
         $this->crud->setModel(TestArticleModel::class);
         $this->crud->setRoute('admin/article');
@@ -22,12 +22,12 @@ class TestProCrudController extends CrudController
         $this->crud->inlineCreate();
     }
 
-    public function setupCloneOperation()
+    public function setupCloneOperation(): void
     {
         $this->crud->clone(['title', 'content']);
     }
 
-    public function setupFetchOperation()
+    public function setupFetchOperation(): void
     {
         $this->crud->fetch(['title', 'status']);
     }

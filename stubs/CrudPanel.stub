@@ -168,4 +168,23 @@ class CrudPanel
      * @return \Backpack\CRUD\app\Library\CrudPanel\CrudField|null
      */
     public function field(string $name) {}
+
+    /**
+     * Pro package operations - clone, fetch, inlineCreate
+     * @param mixed ...$params
+     * @return $this
+     */
+    public function clone(...$params) {}
+
+    /**
+     * @param mixed ...$params
+     * @return $this
+     */
+    public function fetch(...$params) {}
+
+    /**
+     * @param mixed ...$params
+     * @return $this
+     */
+    public function inlineCreate(...$params) {}
 }

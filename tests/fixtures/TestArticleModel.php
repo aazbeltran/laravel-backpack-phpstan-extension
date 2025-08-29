@@ -14,6 +14,7 @@ class TestArticleModel extends Model
         'status'
     ];
     
+    /** @var array<string,string> */
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

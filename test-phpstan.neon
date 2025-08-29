@@ -1,0 +1,6 @@
+parameters:
+  level: 8
+  paths:
+    - tests/fixtures
+includes:
+  - extension.neon

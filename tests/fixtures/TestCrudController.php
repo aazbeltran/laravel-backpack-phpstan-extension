@@ -7,7 +7,7 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 class TestCrudController extends CrudController
 {
-    public function setup()
+    public function setup(): void
     {
         // Test field magic methods
         CRUD::field('name')
@@ -35,13 +35,13 @@ class TestCrudController extends CrudController
         $filter = CRUD::filter('category')->type('select');
     }
 
-    public function setupListOperation()
+    public function setupListOperation(): void
     {
         CRUD::addColumn(['name' => 'title', 'type' => 'text']);
         CRUD::addColumn(['name' => 'status', 'type' => 'select']);
     }
 
-    public function setupCreateOperation()
+    public function setupCreateOperation(): void
     {
         CRUD::addField(['name' => 'title', 'type' => 'text']);
         CRUD::addField(['name' => 'content', 'type' => 'wysiwyg']);
