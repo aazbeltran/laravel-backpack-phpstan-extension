@@ -1,7 +1,7 @@
 <?php
 
 /**
- * PHPUnit Bootstrap for Laravel Backpack PHPStan Extension Tests
+ * PHPUnit Bootstrap for Laravel Backpack PHPStan Extension Tests.
  */
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';

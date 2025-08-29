@@ -22,7 +22,7 @@ class ProPackageTest extends TestCase
     public function test_pro_controller_stub_exists(): void
     {
         $this->assertStubExists('Pro/ChartController.stub');
-        
+
         // Validate stub content using assertStubContains helper
         $this->assertStubContains('Pro/ChartController.stub', 'class ChartController');
         $this->assertStubContains('Pro/ChartController.stub', 'namespace Backpack\\Pro\\Http\\Controllers');
@@ -59,9 +59,9 @@ class ProPackageTest extends TestCase
     {
         $stubsDir = dirname(__DIR__, 2) . '/stubs';
         $proDir = $stubsDir . '/Pro';
-        
+
         $this->assertDirectoryExists($proDir, 'Pro stubs directory should exist');
-        
+
         $proFiles = glob($proDir . '/*.stub');
         $this->assertGreaterThan(0, count($proFiles), 'Pro directory should contain stub files');
     }

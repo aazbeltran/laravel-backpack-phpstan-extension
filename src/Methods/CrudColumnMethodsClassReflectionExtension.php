@@ -2,14 +2,13 @@
 
 namespace LaravelBackpackPhpstanExtension\Methods;
 
+use LaravelBackpackPhpstanExtension\Reflection\CrudColumnMethodReflection;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\MethodsClassReflectionExtension;
-use PHPStan\Type\ObjectType;
-use LaravelBackpackPhpstanExtension\Reflection\CrudColumnMethodReflection;
 
 /**
- * PHPStan extension for CrudColumn magic methods
+ * PHPStan extension for CrudColumn magic methods.
  */
 class CrudColumnMethodsClassReflectionExtension implements MethodsClassReflectionExtension
 {

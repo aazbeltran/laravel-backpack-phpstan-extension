@@ -9,13 +9,15 @@ use Backpack\Pro\Http\Controllers\Operations\InlineCreateOperation;
 
 class TestProCrudController extends CrudController
 {
-    use CloneOperation, FetchOperation, InlineCreateOperation;
+    use CloneOperation;
+    use FetchOperation;
+    use InlineCreateOperation;
 
     public function setup(): void
     {
         $this->crud->setModel(TestArticleModel::class);
         $this->crud->setRoute('admin/article');
-        
+
         // Test Pro operations
         $this->crud->clone();
         $this->crud->fetch();

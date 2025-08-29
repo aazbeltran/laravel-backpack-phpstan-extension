@@ -22,7 +22,7 @@ class ExtensionBootstrapTest extends TestCase
     {
         $neonPath = dirname(__DIR__, 2) . '/extension.neon';
         $content = file_get_contents($neonPath);
-        
+
         $this->assertStringContainsString('methodsClassReflectionExtension', $content);
         $this->assertStringContainsString('dynamicMethodReturnTypeExtension', $content);
         $this->assertStringContainsString('CrudFieldMethodsClassReflectionExtension', $content);
@@ -33,7 +33,7 @@ class ExtensionBootstrapTest extends TestCase
     {
         $neonPath = dirname(__DIR__, 2) . '/extension.neon';
         $content = file_get_contents($neonPath);
-        
+
         $this->assertStringContainsString('scanFiles:', $content);
         $this->assertStringContainsString('stubs/', $content);
     }
@@ -42,7 +42,7 @@ class ExtensionBootstrapTest extends TestCase
     {
         $neonPath = dirname(__DIR__, 2) . '/extension.neon';
         $content = file_get_contents($neonPath);
-        
+
         $this->assertStringContainsString('bootstrapFiles:', $content);
         $this->assertStringContainsString('bootstrap.php', $content);
     }

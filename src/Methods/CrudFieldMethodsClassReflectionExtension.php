@@ -2,13 +2,13 @@
 
 namespace LaravelBackpackPhpstanExtension\Methods;
 
+use LaravelBackpackPhpstanExtension\Reflection\CrudFieldMethodReflection;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\MethodsClassReflectionExtension;
-use LaravelBackpackPhpstanExtension\Reflection\CrudFieldMethodReflection;
 
 /**
- * PHPStan extension for CrudField magic methods
+ * PHPStan extension for CrudField magic methods.
  */
 class CrudFieldMethodsClassReflectionExtension implements MethodsClassReflectionExtension
 {

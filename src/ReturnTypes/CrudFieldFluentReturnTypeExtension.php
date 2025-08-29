@@ -5,11 +5,10 @@ namespace LaravelBackpackPhpstanExtension\ReturnTypes;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
-use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 
 /**
- * Return type extension for CrudField fluent interface methods
+ * Return type extension for CrudField fluent interface methods.
  */
 class CrudFieldFluentReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
@@ -21,7 +20,7 @@ class CrudFieldFluentReturnTypeExtension implements DynamicMethodReturnTypeExten
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
         $className = $methodReflection->getDeclaringClass()->getName();
-        
+
         // Support fluent interface for CrudField and its subclasses
         return $className === 'Backpack\\CRUD\\app\\Library\\CrudPanel\\CrudField' ||
                $methodReflection->getDeclaringClass()->isSubclassOf('Backpack\\CRUD\\app\\Library\\CrudPanel\\CrudField');

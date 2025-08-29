@@ -10,13 +10,13 @@ class StubsTest extends TestCase
     {
         $coreStubs = [
             'CrudPanel.stub',
-            'CrudField.stub', 
+            'CrudField.stub',
             'CrudColumn.stub',
             'CrudFilter.stub',
             'Widget.stub',
             'CrudController.stub',
             'CrudPanelFacade.stub',
-            'LaravelFacades.stub'
+            'LaravelFacades.stub',
         ];
 
         foreach ($coreStubs as $stub) {
@@ -28,9 +28,9 @@ class StubsTest extends TestCase
     {
         $proStubs = [
             'Pro/CloneOperation.stub',
-            'Pro/FetchOperation.stub', 
+            'Pro/FetchOperation.stub',
             'Pro/InlineCreateOperation.stub',
-            'Pro/ChartController.stub'
+            'Pro/ChartController.stub',
         ];
 
         foreach ($proStubs as $stub) {
@@ -76,7 +76,7 @@ class StubsTest extends TestCase
     public function test_laravel_facades_stub_contains_common_facades(): void
     {
         $facades = ['Request', 'Route', 'Schema', 'Auth', 'Artisan', 'Alert'];
-        
+
         foreach ($facades as $facade) {
             $this->assertStubContains('LaravelFacades.stub', "class {$facade}");
         }
@@ -88,11 +88,11 @@ class StubsTest extends TestCase
         $this->assertStubContains('Pro/CloneOperation.stub', '@method');
         $this->assertStubContains('Pro/CloneOperation.stub', 'clone()');
         $this->assertStubContains('Pro/CloneOperation.stub', 'setupCloneOperation()');
-        
+
         $this->assertStubContains('Pro/FetchOperation.stub', '@method');
         $this->assertStubContains('Pro/FetchOperation.stub', 'fetch()');
         $this->assertStubContains('Pro/FetchOperation.stub', 'setupFetchOperation()');
-        
+
         $this->assertStubContains('Pro/InlineCreateOperation.stub', '@method');
         $this->assertStubContains('Pro/InlineCreateOperation.stub', 'inlineCreate()');
         $this->assertStubContains('Pro/InlineCreateOperation.stub', 'setupInlineCreateOperation()');

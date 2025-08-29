@@ -10,7 +10,7 @@ class CrudColumnTest extends TestCase
     {
         $extensionClass = 'LaravelBackpackPhpstanExtension\\Methods\\CrudColumnMethodsClassReflectionExtension';
         $this->assertTrue(class_exists($extensionClass), 'CrudColumn extension class should exist');
-        
+
         $extension = new $extensionClass();
         $this->assertInstanceOf($extensionClass, $extension);
     }
@@ -25,7 +25,7 @@ class CrudColumnTest extends TestCase
     {
         $returnTypeClass = 'LaravelBackpackPhpstanExtension\\ReturnTypes\\CrudColumnFluentReturnTypeExtension';
         $this->assertTrue(class_exists($returnTypeClass), 'CrudColumn return type extension class should exist');
-        
+
         $extension = new $returnTypeClass();
         $this->assertInstanceOf($returnTypeClass, $extension);
     }
@@ -33,7 +33,7 @@ class CrudColumnTest extends TestCase
     public function test_crud_column_stub_contains_expected_content(): void
     {
         $this->assertStubExists('CrudColumn.stub');
-        
+
         // Validate stub content using assertStubContains helper
         $this->assertStubContains('CrudColumn.stub', 'class CrudColumn');
         $this->assertStubContains('CrudColumn.stub', 'public function type(');
@@ -46,7 +46,7 @@ class CrudColumnTest extends TestCase
     {
         // Check that methods return $this for fluent interface
         $this->assertStubContains('CrudColumn.stub', 'return $this;');
-        
+
         // Check that the class exists in the proper namespace
         $this->assertStubContains('CrudColumn.stub', 'namespace Backpack\\CRUD\\app\\Library\\CrudPanel;');
     }

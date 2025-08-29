@@ -6,15 +6,15 @@ use PHPStan\Reflection\ClassMemberReflection;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\TrivialParametersAcceptor;
-use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 
 /**
- * Method reflection for CrudColumn dynamic methods
+ * Method reflection for CrudColumn dynamic methods.
  */
 class CrudColumnMethodReflection implements MethodReflection
 {
     private ClassReflection $classReflection;
+
     private string $methodName;
 
     public function __construct(ClassReflection $classReflection, string $methodName)
@@ -66,7 +66,7 @@ class CrudColumnMethodReflection implements MethodReflection
     public function getVariants(): array
     {
         return [
-            new TrivialParametersAcceptor()
+            new TrivialParametersAcceptor(),
         ];
     }
 

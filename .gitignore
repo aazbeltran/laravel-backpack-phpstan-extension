@@ -9,6 +9,7 @@ vendor/
 /.coverage/
 /.php_cs.cache
 /.php-cs-fixer.php.cache
+/.php-cs-fixer.cache
 /.phpstan/cache/
 /.cache/
 /.dist/
