@@ -1,0 +1,87 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql, mysqli, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-dev --optimize-autoloader
+
+      - name: Run tests
+        run: |
+          composer install --prefer-dist --no-progress --dev
+          vendor/bin/phpunit
+
+      - name: Validate package
+        run: |
+          # Test extension loading
+          echo "parameters:
+            level: 8
+            paths:
+              - tests/fixtures
+          includes:
+            - extension.neon" > test-phpstan.neon
+          vendor/bin/phpstan analyse -c test-phpstan.neon --error-format=table
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            README.md
+            CHANGELOG.md
+            composer.json
+          body: |
+            ## Laravel Backpack PHPStan Extension ${{ github.ref_name }}
+            
+            This release provides static analysis support for Laravel Backpack packages.
+            
+            ### Installation
+            ```bash
+            composer require --dev aazbeltran/laravel-backpack-phpstan-extension
+            ```
+            
+            ### Compatibility
+            - PHP: ^8.1|^8.2|^8.3
+            - PHPStan: ^1.10|^2.0
+            - Laravel: ^10.0|^11.0|^12.0
+            - Backpack CRUD: ^6.0
+            
+            ### What's Included
+            - ✅ Static analysis for Backpack CRUD dynamic methods
+            - ✅ Support for fluent field/column configuration
+            - ✅ Pro package operation stubs
+            - ✅ Laravel facade stubs
+            - ✅ Comprehensive test coverage
+            
+            **Note**: This extension was built against specific Backpack package versions. 
+            If you encounter compatibility issues with newer versions, please open an issue 
+            or contribute via our agentic maintenance process.
+            
+            See [AGENTS.md](AGENTS.md) for contribution and maintenance guidelines.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-packagist:
+    runs-on: ubuntu-latest
+    needs: release
+
+    steps:
+      - name: Trigger Packagist Update
+        run: |
+          echo "Release tagged. Packagist should auto-update if webhook is configured."
+          echo "Manual trigger: Visit https://packagist.org/packages/aazbeltran/laravel-backpack-phpstan-extension and click 'Update'"

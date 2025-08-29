@@ -1,0 +1,176 @@
+<?php
+
+namespace Backpack\CRUD\app\Library\CrudPanel;
+
+/**
+ * CrudFilter stub for PHPStan static analysis
+ * 
+ * This class uses magic methods (__call) to provide fluent interface
+ * for configuring CRUD filters.
+ */
+class CrudFilter
+{
+    /** @var array<string, mixed> */
+    protected $attributes = [];
+
+    /** @var CrudPanel */
+    protected $crud;
+
+    // Public properties matching the actual CrudFilter class
+    public $name;
+    public $type = 'select2';
+    public $key;
+    public $label;
+    public $placeholder;
+    public $values;
+    public $options;
+    public $logic;
+    public $fallbackLogic;
+    public $currentValue;
+    public $view;
+    public $viewNamespace = 'crud::filters';
+    public $applied = false;
+
+    public function __construct(array $filter = [])
+    {
+        $this->attributes = $filter;
+    }
+
+    /**
+     * Set filter type
+     */
+    public function type(string $type): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set filter name
+     */
+    public function name(string $name): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set filter label
+     */
+    public function label(string $label): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set filter values
+     */
+    public function values(array|callable $values): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set filter placeholder
+     */
+    public function placeholder(string $placeholder): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set filter model
+     */
+    public function model(string $model): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set filter options
+     */
+    public function options(array $options): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set filter view namespace
+     */
+    public function view_namespace(string $namespace): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set filter logic
+     */
+    public function logic(callable $logic): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set fallback logic
+     */
+    public function fallbackLogic(callable $logic): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set filter key
+     */
+    public function key(string $key): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set filter method
+     */
+    public function method(string $method): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set filter persistent
+     */
+    public function persistent(bool $persistent = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set filter default value
+     */
+    public function default(mixed $default): self
+    {
+        return $this;
+    }
+
+    /**
+     * Save the filter to the CRUD panel
+     */
+    public function save(): self
+    {
+        return $this;
+    }
+
+    /**
+     * Get filter attribute value
+     */
+    public function get(string $key, mixed $default = null): mixed
+    {
+        return $this->attributes[$key] ?? $default;
+    }
+
+    /**
+     * Magic method for dynamic attribute setting
+     * All unknown method calls are treated as attribute setters
+     */
+    public function __call(string $method, array $parameters): self
+    {
+        $this->attributes[$method] = $parameters[0] ?? true;
+        return $this;
+    }
+}

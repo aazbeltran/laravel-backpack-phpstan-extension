@@ -1,0 +1,150 @@
+<?php
+
+namespace Backpack\CRUD\app\Library;
+
+/**
+ * Widget stub for PHPStan static analysis
+ * 
+ * This class provides methods for creating and configuring widgets
+ * in Laravel Backpack.
+ */
+class Widget
+{
+    /** @var array<string, mixed> */
+    protected $attributes = [];
+
+    public function __construct(array $attributes = [])
+    {
+        $this->attributes = $attributes;
+    }
+
+    /**
+     * Set widget type
+     */
+    public function type(string $type): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set widget wrapper
+     */
+    public function wrapper(array $wrapper): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set widget class
+     */
+    public function class(string $class): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set widget content
+     */
+    public function content(string|array $content): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set widget view namespace
+     */
+    public function view_namespace(string $namespace): self
+    {
+        return $this;
+    }
+
+    /**
+     * Add script
+     */
+    public function script(string $script): self
+    {
+        return $this;
+    }
+
+    /**
+     * Add style
+     */
+    public function style(string $style): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set widget heading
+     */
+    public function heading(string $heading): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set widget description
+     */
+    public function description(string $description): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set widget progressClass
+     */
+    public function progressClass(string $progressClass): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set widget value
+     */
+    public function value(mixed $value): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set widget hint
+     */
+    public function hint(string $hint): self
+    {
+        return $this;
+    }
+
+    /**
+     * Get widget attribute value
+     */
+    public function get(string $key, mixed $default = null): mixed
+    {
+        return $this->attributes[$key] ?? $default;
+    }
+
+    /**
+     * Magic method for dynamic attribute setting
+     * All unknown method calls are treated as attribute setters
+     */
+    public function __call(string $method, array $parameters): self
+    {
+        $this->attributes[$method] = $parameters[0] ?? true;
+        return $this;
+    }
+
+    /**
+     * Render the widget
+     */
+    public function render(): string
+    {
+        return '';
+    }
+
+    /**
+     * Convert widget to array
+     */
+    public function toArray(): array
+    {
+        return $this->attributes;
+    }
+}

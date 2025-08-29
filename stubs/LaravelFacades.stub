@@ -1,0 +1,144 @@
+<?php
+
+/**
+ * Laravel facades stubs for PHPStan
+ */
+
+class Request
+{
+    /**
+     * @return \Illuminate\Http\Request
+     */
+    public static function instance() {}
+}
+
+class Route
+{
+    /**
+     * @return bool
+     */
+    public static function has(string $name) {}
+    
+    /**
+     * @return \Illuminate\Routing\Route|null
+     */
+    public static function getCurrentRoute() {}
+    
+    /**
+     * @return \Illuminate\Routing\PendingResourceRegistration
+     */
+    public static function crud(string $name, string $controller) {}
+}
+
+class Schema
+{
+    /**
+     * @return bool
+     */
+    public static function hasColumn(string $table, string $column) {}
+}
+
+class Auth
+{
+    /**
+     * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard
+     */
+    public static function guard(?string $name = null) {}
+}
+
+class Artisan
+{
+    /**
+     * @return int
+     */
+    public static function call(string $command, array $parameters = []) {}
+}
+
+class File
+{
+    /**
+     * @return string|false
+     */
+    public static function get(string $path, bool $lock = false) {}
+    
+    /**
+     * @return bool
+     */
+    public static function exists(string $path) {}
+    
+    /**
+     * @return int|false
+     */
+    public static function put(string $path, string $contents, bool $lock = false) {}
+}
+
+class Str
+{
+    /**
+     * @return \Illuminate\Support\Stringable
+     */
+    public static function of(string $string) {}
+}
+
+class Alert
+{
+    /**
+     * @return void
+     */
+    public static function success(string $message) {}
+    
+    /**
+     * @return void
+     */
+    public static function error(string $message) {}
+    
+    /**
+     * @return void
+     */
+    public static function info(string $message) {}
+}
+
+class Validator
+{
+    /**
+     * @return \Illuminate\Validation\Validator
+     */
+    public static function make(array $data, array $rules, array $messages = [], array $customAttributes = []) {}
+}
+
+class View
+{
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
+    public static function make(string $view, array $data = [], array $mergeData = []) {}
+}
+
+class Redirect
+{
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public static function to(string $path, int $status = 302, array $headers = [], ?bool $secure = null) {}
+}
+
+class Log
+{
+    /**
+     * @return void
+     */
+    public static function error(string $message, array $context = []) {}
+}
+
+class Arr
+{
+    /**
+     * @return bool
+     */
+    public static function has(array $array, string|array $keys) {}
+    
+    /**
+     * @return mixed
+     */
+    public static function get(array $array, string|int|null $key, mixed $default = null) {}
+}

@@ -1,0 +1,138 @@
+name: Maintenance
+
+on:
+  schedule:
+    # Run weekly on Sundays at 2 AM UTC
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+    inputs:
+      check_type:
+        description: 'Type of maintenance check'
+        required: true
+        default: 'compatibility'
+        type: choice
+        options:
+          - compatibility
+          - dependencies
+          - stubs
+          - full
+
+jobs:
+  maintenance-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql, mysqli, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+
+      - name: Check for Backpack Updates
+        id: backpack-check
+        run: |
+          echo "Checking for new Backpack package versions..."
+          
+          # Get latest versions
+          CRUD_LATEST=$(composer show backpack/crud --latest --format=json | jq -r '.latest')
+          BASSET_LATEST=$(composer show backpack/basset --latest --format=json | jq -r '.latest')
+          
+          echo "Latest CRUD version: $CRUD_LATEST"
+          echo "Latest Basset version: $BASSET_LATEST"
+          
+          # Check if our extension supports these versions
+          CRUD_CURRENT=$(grep "backpack/crud" composer.json | grep -oE '\^[0-9]+\.[0-9]+')
+          echo "Current CRUD constraint: $CRUD_CURRENT"
+          
+          echo "::set-output name=crud_latest::$CRUD_LATEST"
+          echo "::set-output name=crud_current::$CRUD_CURRENT"
+
+      - name: Check PHPStan Compatibility
+        run: |
+          echo "Testing with latest PHPStan versions..."
+          
+          # Test with PHPStan 1.x
+          composer require "phpstan/phpstan:^1.10" --dev --no-update
+          composer update phpstan/phpstan
+          vendor/bin/phpstan --version
+          vendor/bin/phpstan analyse src --level 8
+          
+          # Test with PHPStan 2.x
+          composer require "phpstan/phpstan:^2.0" --dev --no-update
+          composer update phpstan/phpstan
+          vendor/bin/phpstan --version
+          vendor/bin/phpstan analyse src --level 8
+
+      - name: Test with Latest Laravel
+        run: |
+          echo "Testing with latest Laravel version..."
+          
+          # Create a test project with latest Laravel
+          composer create-project laravel/laravel temp-laravel --prefer-dist --no-progress
+          cd temp-laravel
+          
+          # Install our extension
+          composer config repositories.local path ../
+          composer require "aazbeltran/laravel-backpack-phpstan-extension:*" --dev
+          
+          # Test PHPStan runs
+          echo "parameters:
+            level: 5
+            paths:
+              - app
+          includes:
+            - vendor/aazbeltran/laravel-backpack-phpstan-extension/extension.neon" > phpstan.neon
+          
+          vendor/bin/phpstan analyse --error-format=table
+
+      - name: Generate Maintenance Report
+        run: |
+          echo "# Maintenance Report - $(date)" >> maintenance-report.md
+          echo "" >> maintenance-report.md
+          echo "## Package Versions" >> maintenance-report.md
+          echo "- CRUD Latest: ${{ steps.backpack-check.outputs.crud_latest }}" >> maintenance-report.md
+          echo "- Current Constraint: ${{ steps.backpack-check.outputs.crud_current }}" >> maintenance-report.md
+          echo "" >> maintenance-report.md
+          echo "## Tests Status" >> maintenance-report.md
+          echo "✅ PHPStan 1.x compatibility" >> maintenance-report.md
+          echo "✅ PHPStan 2.x compatibility" >> maintenance-report.md
+          echo "✅ Latest Laravel compatibility" >> maintenance-report.md
+          echo "" >> maintenance-report.md
+          echo "## Recommendations" >> maintenance-report.md
+          echo "- Monitor for new Backpack releases" >> maintenance-report.md
+          echo "- Consider updating stubs if major changes detected" >> maintenance-report.md
+          echo "- Review AGENTS.md for contribution process" >> maintenance-report.md
+
+      - name: Create Issue if Needed
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Maintenance Check Failed - ' + new Date().toISOString().split('T')[0],
+              body: `# Automated Maintenance Check Failed
+            
+            The scheduled maintenance check has detected potential compatibility issues.
+            
+            ## Details
+            - **Date**: ${new Date().toISOString()}
+            - **Check Type**: ${{ github.event.inputs.check_type || 'scheduled' }}
+            - **Trigger**: ${{ github.event_name }}
+            
+            ## Actions Needed
+            1. Review the failed workflow run
+            2. Check for new Backpack package versions
+            3. Update stubs if necessary
+            4. Run tests manually to verify fixes
+            
+            ## Maintenance Process
+            See [AGENTS.md](AGENTS.md) for detailed maintenance procedures and agentic automation guidelines.
+            
+            /cc @aazbeltran`,
+              labels: ['maintenance', 'automated', 'needs-investigation']
+            })

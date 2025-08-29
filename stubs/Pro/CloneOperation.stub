@@ -1,0 +1,19 @@
+<?php
+
+namespace Backpack\Pro\Http\Controllers\Operations;
+
+/**
+ * @method $this clone()
+ * @method $this cloneClone()
+ * @method $this bulkClone(array $entries)
+ * @method void setupCloneDefaults()
+ * @method void setupCloneOperation()
+ * @method void setupBulkCloneDefaults()
+ * @method void setupBulkCloneOperation()
+ * @method \Illuminate\Http\RedirectResponse cloneEntry($id)
+ * @method \Illuminate\Http\RedirectResponse bulkCloneEntries()
+ */
+trait CloneOperation
+{
+    //
+}

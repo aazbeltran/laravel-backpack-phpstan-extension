@@ -1,0 +1,11 @@
+<?php
+
+namespace Backpack\Pro\Http\Controllers;
+
+/**
+ * Pro ChartController stub for PHPStan
+ */
+class ChartController
+{
+    //
+}

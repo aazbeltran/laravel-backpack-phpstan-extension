@@ -1,0 +1,16 @@
+<?php
+
+namespace Backpack\Pro\Http\Controllers\Operations;
+
+/**
+ * @method $this fetch()
+ * @method $this fetchFetch()
+ * @method void setupFetchDefaults()
+ * @method void setupFetchOperation()
+ * @method \Illuminate\Http\JsonResponse fetchEntries()
+ * @method \Illuminate\Http\JsonResponse fetch(\Illuminate\Http\Request $request)
+ */
+trait FetchOperation
+{
+    //
+}

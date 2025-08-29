@@ -1,0 +1,155 @@
+<?php
+
+namespace Backpack\CRUD\app\Http\Controllers;
+
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanel;
+
+/**
+ * CrudController stub for PHPStan static analysis
+ */
+abstract class CrudController extends Controller
+{
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /** @var CrudPanel */
+    public $crud;
+
+    public function __construct()
+    {
+        // Initialize CRUD panel
+    }
+
+    /**
+     * Setup function for CRUD operations
+     */
+    public function setup(): void
+    {
+        // Override in child classes
+    }
+
+    /**
+     * Setup list operation
+     */
+    protected function setupListOperation(): void
+    {
+        // Override in child classes
+    }
+
+    /**
+     * Setup create operation
+     */
+    protected function setupCreateOperation(): void
+    {
+        // Override in child classes
+    }
+
+    /**
+     * Setup update operation
+     */
+    protected function setupUpdateOperation(): void
+    {
+        // Override in child classes
+    }
+
+    /**
+     * Setup show operation
+     */
+    protected function setupShowOperation(): void
+    {
+        // Override in child classes
+    }
+
+    /**
+     * Setup delete operation
+     */
+    protected function setupDeleteOperation(): void
+    {
+        // Override in child classes
+    }
+
+    /**
+     * List entries
+     */
+    public function index(): \Illuminate\View\View
+    {
+        return view('crud::list');
+    }
+
+    /**
+     * Show the form for creating a new entry
+     */
+    public function create(): \Illuminate\View\View
+    {
+        return view('crud::create');
+    }
+
+    /**
+     * Store a newly created entry
+     */
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        return redirect()->back();
+    }
+
+    /**
+     * Show an entry
+     */
+    public function show(int $id): \Illuminate\View\View
+    {
+        return view('crud::show');
+    }
+
+    /**
+     * Show the form for editing an entry
+     */
+    public function edit(int $id): \Illuminate\View\View
+    {
+        return view('crud::edit');
+    }
+
+    /**
+     * Update an entry
+     */
+    public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
+    {
+        return redirect()->back();
+    }
+
+    /**
+     * Remove an entry
+     */
+    public function destroy(int $id): \Illuminate\Http\RedirectResponse
+    {
+        return redirect()->back();
+    }
+
+    /**
+     * Search entries for AJAX requests
+     */
+    public function search(): \Illuminate\Http\JsonResponse
+    {
+        return response()->json([]);
+    }
+
+    /**
+     * Get entries for DataTables
+     */
+    public function getEntries(): \Illuminate\Http\JsonResponse
+    {
+        return response()->json([]);
+    }
+
+    /**
+     * Show details modal
+     */
+    public function showDetailsRow(int $id): string
+    {
+        return '';
+    }
+}

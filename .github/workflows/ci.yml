@@ -1,0 +1,129 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['8.1', '8.2', '8.3']
+        phpstan-version: ['^1.10', '^2.0']
+
+    name: PHP ${{ matrix.php-version }} - PHPStan ${{ matrix.phpstan-version }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql, mysqli, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: xdebug
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ matrix.php-version }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-${{ matrix.php-version }}-
+
+      - name: Install dependencies
+        run: |
+          # Install specific PHPStan version for matrix testing
+          composer require "phpstan/phpstan:${{ matrix.phpstan-version }}" --dev --no-update
+          composer install --prefer-dist --no-progress
+
+      - name: Run PHPUnit Tests
+        run: vendor/bin/phpunit
+
+      - name: Run PHPStan Analysis
+        run: vendor/bin/phpstan analyse --level 8 src
+
+      - name: Test Extension Loading
+        run: |
+          # Test that the extension can be loaded by PHPStan
+          echo "parameters:
+            level: 8
+            paths:
+              - tests/fixtures
+          includes:
+            - extension.neon" > test-phpstan.neon
+          vendor/bin/phpstan analyse -c test-phpstan.neon --error-format=table
+
+  code-style:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql, mysqli, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Check code style (PHP CS Fixer)
+        run: |
+          composer require friendsofphp/php-cs-fixer --dev
+          vendor/bin/php-cs-fixer fix --dry-run --diff
+
+  compatibility-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        laravel-version: ['10.*', '11.*']
+
+    name: Laravel ${{ matrix.laravel-version }} Compatibility
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql, mysqli, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+
+      - name: Install Laravel ${{ matrix.laravel-version }}
+        run: |
+          composer create-project laravel/laravel temp-app "${{ matrix.laravel-version }}" --prefer-dist --no-progress
+          cd temp-app
+          composer require "phpstan/phpstan:^1.10" --dev
+
+      - name: Test Extension with Laravel Project
+        run: |
+          cd temp-app
+          # Copy our extension into the Laravel project for testing
+          cp -r "$GITHUB_WORKSPACE/src" vendor/aazbeltran/laravel-backpack-phpstan-extension/src
+          cp "$GITHUB_WORKSPACE/extension.neon" vendor/aazbeltran/laravel-backpack-phpstan-extension/
+          cp "$GITHUB_WORKSPACE/bootstrap.php" vendor/aazbeltran/laravel-backpack-phpstan-extension/
+          cp -r "$GITHUB_WORKSPACE/stubs" vendor/aazbeltran/laravel-backpack-phpstan-extension/
+          
+          # Create a test PHPStan config that includes our extension
+          echo "parameters:
+            level: 5
+            paths:
+              - app
+          includes:
+            - vendor/aazbeltran/laravel-backpack-phpstan-extension/extension.neon" > phpstan.neon
+          
+          # Test that PHPStan runs without errors
+          vendor/bin/phpstan analyse --error-format=table

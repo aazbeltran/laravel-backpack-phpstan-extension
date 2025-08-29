@@ -1,0 +1,73 @@
+{
+    "name": "aazbeltran/laravel-backpack-phpstan-extension",
+    "description": "PHPStan extension for Laravel Backpack - Adds static analysis support for Backpack CRUD, Basset, and other Backpack components",
+    "type": "phpstan-extension",
+    "keywords": [
+        "phpstan",
+        "laravel",
+        "backpack",
+        "crud",
+        "static-analysis",
+        "type-checking",
+        "php",
+        "extension"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alonso Zuniga",
+            "email": "lb-phpstan@aazbeltran.dev"
+        }
+    ],
+    "require": {
+        "php": "^8.1|^8.2|^8.3",
+        "phpstan/phpstan": "^1.10|^2.0"
+    },
+    "require-dev": {
+        "backpack/crud": "^6.0",
+        "backpack/basset": "^1.0",
+        "phpunit/phpunit": "^10.0|^11.0",
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
+        "mockery/mockery": "^1.6",
+        "friendsofphp/php-cs-fixer": "^3.0"
+    },
+    "suggest": {
+        "backpack/crud": "Required to use Laravel Backpack CRUD static analysis features",
+        "backpack/basset": "Required to use Laravel Backpack Basset static analysis features",
+        "backpack/pro": "Required to use Laravel Backpack Pro static analysis features"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelBackpackPhpstanExtension\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaravelBackpackPhpstanExtension\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "phpstan": {
+            "includes": [
+                "extension.neon"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse --level 8 src",
+        "fix-style": "php-cs-fixer fix",
+        "check-style": "php-cs-fixer fix --dry-run --diff",
+        "health-check": "./scripts/health-check.sh",
+        "inspect-backpack": "./scripts/inspect-backpack.sh",
+        "test-extension": "./scripts/test-extension.sh",
+        "post-install-cmd": [
+            "@composer dump-autoload"
+        ],
+        "post-update-cmd": [
+            "@composer dump-autoload"
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

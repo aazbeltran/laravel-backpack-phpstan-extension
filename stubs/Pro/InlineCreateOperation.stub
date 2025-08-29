@@ -1,0 +1,16 @@
+<?php
+
+namespace Backpack\Pro\Http\Controllers\Operations;
+
+/**
+ * @method $this inlineCreate()
+ * @method $this inlineCreateInlineCreate()
+ * @method void setupInlineCreateDefaults()
+ * @method void setupInlineCreateOperation()
+ * @method \Illuminate\Http\JsonResponse inlineCreate(\Illuminate\Http\Request $request)
+ * @method \Illuminate\Http\JsonResponse storeInline(\Illuminate\Http\Request $request)
+ */
+trait InlineCreateOperation
+{
+    //
+}

@@ -1,0 +1,289 @@
+<?php
+
+namespace Backpack\CRUD\app\Library\CrudPanel;
+
+/**
+ * CrudField stub for PHPStan static analysis
+ * 
+ * This class uses magic methods (__call) to provide fluent interface
+ * for configuring CRUD fields. All setter methods return $this for chaining.
+ */
+class CrudField
+{
+    /** @var array<string, mixed> */
+    protected $attributes = [];
+
+    /** @var CrudPanel */
+    protected $crud;
+
+    public function __construct(array $field = [])
+    {
+        $this->attributes = $field;
+    }
+
+    /**
+     * Set field type
+     */
+    public function type(string $type): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field name
+     */
+    public function name(string $name): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field label
+     */
+    public function label(string $label): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field value
+     */
+    public function value(mixed $value): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set default value
+     */
+    public function default(mixed $default): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field hint/help text
+     */
+    public function hint(string $hint): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field tab
+     */
+    public function tab(string $tab): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field wrapper attributes
+     */
+    public function wrapper(array $wrapper): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field HTML attributes
+     */
+    public function attributes(array $attributes): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field prefix
+     */
+    public function prefix(string $prefix): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field suffix
+     */
+    public function suffix(string $suffix): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set entity for relationship fields
+     */
+    public function entity(string $entity): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set model for relationship fields
+     */
+    public function model(string $model): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set attribute for relationship fields
+     */
+    public function attribute(string $attribute): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set if field allows multiple values
+     */
+    public function multiple(bool $multiple = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set if field is pivot field
+     */
+    public function pivot(bool $pivot = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field options for select-type fields
+     */
+    public function options(array|callable $options): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set if field allows null values
+     */
+    public function allows_null(bool $allows_null = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Mark field as required
+     */
+    public function required(bool $required = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field placeholder
+     */
+    public function placeholder(string $placeholder): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field as readonly
+     */
+    public function readonly(bool $readonly = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field as disabled
+     */
+    public function disabled(bool $disabled = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set field priority
+     */
+    public function priority(int $priority): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set view namespace
+     */
+    public function view_namespace(string $namespace): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set as fake field
+     */
+    public function fake(bool $fake = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set where to store the field data
+     */
+    public function store_in(string $store_in): self
+    {
+        return $this;
+    }
+
+    /**
+     * Configure upload settings
+     */
+    public function upload(bool $upload = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set upload disk
+     */
+    public function disk(string $disk): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set if upload is temporary
+     */
+    public function temporary(bool $temporary = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set upload expiration
+     */
+    public function expiration(int $minutes): self
+    {
+        return $this;
+    }
+
+    /**
+     * Save the field to the CRUD panel
+     */
+    public function save(): self
+    {
+        return $this;
+    }
+
+    /**
+     * Get field attribute value
+     */
+    public function get(string $key, mixed $default = null): mixed
+    {
+        return $this->attributes[$key] ?? $default;
+    }
+
+    /**
+     * Magic method for dynamic attribute setting
+     * All unknown method calls are treated as attribute setters
+     */
+    public function __call(string $method, array $parameters): self
+    {
+        $this->attributes[$method] = $parameters[0] ?? true;
+        return $this;
+    }
+}

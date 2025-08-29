@@ -1,0 +1,209 @@
+<?php
+
+namespace Backpack\CRUD\app\Library\CrudPanel;
+
+/**
+ * CrudColumn stub for PHPStan static analysis
+ * 
+ * This class uses magic methods (__call) to provide fluent interface
+ * for configuring CRUD columns. All setter methods return $this for chaining.
+ */
+class CrudColumn
+{
+    /** @var array<string, mixed> */
+    protected $attributes = [];
+
+    /** @var CrudPanel */
+    protected $crud;
+
+    public function __construct(array $column = [])
+    {
+        $this->attributes = $column;
+    }
+
+    /**
+     * Set column type
+     */
+    public function type(string $type): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set column name
+     */
+    public function name(string $name): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set column label
+     */
+    public function label(string $label): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set entity for relationship columns
+     */
+    public function entity(string $entity): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set model for relationship columns
+     */
+    public function model(string $model): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set attribute for relationship columns
+     */
+    public function attribute(string $attribute): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set column key
+     */
+    public function key(string $key): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set column limit
+     */
+    public function limit(int $limit): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set if column is searchable
+     */
+    public function searchable(bool $searchable = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set if column is orderable
+     */
+    public function orderable(bool $orderable = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set column visibility
+     */
+    public function visibleInTable(bool $visible = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set column priority
+     */
+    public function priority(int $priority): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set column wrapper
+     */
+    public function wrapper(array $wrapper): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set column escaped
+     */
+    public function escaped(bool $escaped = true): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set column prefix
+     */
+    public function prefix(string $prefix): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set column suffix
+     */
+    public function suffix(string $suffix): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set number format options
+     */
+    public function decimals(int $decimals): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set decimal point
+     */
+    public function dec_point(string $dec_point): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set thousands separator
+     */
+    public function thousands_sep(string $thousands_sep): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set view namespace
+     */
+    public function view_namespace(string $namespace): self
+    {
+        return $this;
+    }
+
+    /**
+     * Save the column to the CRUD panel
+     */
+    public function save(): self
+    {
+        return $this;
+    }
+
+    /**
+     * Get column attribute value
+     */
+    public function get(string $key, mixed $default = null): mixed
+    {
+        return $this->attributes[$key] ?? $default;
+    }
+
+    /**
+     * Magic method for dynamic attribute setting
+     * All unknown method calls are treated as attribute setters
+     */
+    public function __call(string $method, array $parameters): self
+    {
+        $this->attributes[$method] = $parameters[0] ?? true;
+        return $this;
+    }
+}

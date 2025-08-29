@@ -1,0 +1,38 @@
+parametersSchema:
+	backpackExtension: structure([])
+
+parameters:
+	backpackExtension: []
+	scanFiles:
+		- stubs/CrudPanel.stub
+		- stubs/CrudField.stub
+		- stubs/CrudColumn.stub
+		- stubs/CrudFilter.stub
+		- stubs/Widget.stub
+		- stubs/CrudController.stub
+		- stubs/CrudPanelFacade.stub
+		- stubs/LaravelFacades.stub
+		- stubs/Pro/CloneOperation.stub
+		- stubs/Pro/FetchOperation.stub
+		- stubs/Pro/InlineCreateOperation.stub
+		- stubs/Pro/ChartController.stub
+	bootstrapFiles:
+		- bootstrap.php
+
+services:
+	- 
+		class: LaravelBackpackPhpstanExtension\Methods\CrudFieldMethodsClassReflectionExtension
+		tags:
+			- phpstan.broker.methodsClassReflectionExtension
+	-
+		class: LaravelBackpackPhpstanExtension\Methods\CrudColumnMethodsClassReflectionExtension
+		tags:
+			- phpstan.broker.methodsClassReflectionExtension
+	-
+		class: LaravelBackpackPhpstanExtension\ReturnTypes\CrudFieldFluentReturnTypeExtension
+		tags:
+			- phpstan.broker.dynamicMethodReturnTypeExtension
+	-
+		class: LaravelBackpackPhpstanExtension\ReturnTypes\CrudColumnFluentReturnTypeExtension
+		tags:
+			- phpstan.broker.dynamicMethodReturnTypeExtension

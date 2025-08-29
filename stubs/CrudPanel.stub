@@ -1,0 +1,171 @@
+<?php
+
+namespace Backpack\CRUD\app\Library\CrudPanel;
+
+/**
+ * CrudPanel stub for PHPStan static analysis
+ * 
+ * This stub provides type hints for the main CrudPanel class
+ * to help PHPStan understand the dynamic nature of Backpack CRUD operations.
+ */
+class CrudPanel
+{
+    public string $route;
+    public string $entity_name;
+    public string $entity_name_plural;
+    public string $model;
+    public array $columns = [];
+    public array $fields = [];
+    public array $filters = [];
+    public array $buttons = [];
+    public array $operations = [];
+    public object $entry;
+    public \Illuminate\Database\Eloquent\Builder $query;
+    public \Illuminate\Http\Request $request;
+
+    /**
+     * @param string $name
+     * @param array $definition
+     * @return $this
+     */
+    public function addField(string $name, array $definition = []) {}
+
+    /**
+     * @param string|array $name
+     * @param array $definition
+     * @return $this
+     */
+    public function addColumn(string|array $name, array $definition = []) {}
+
+    /**
+     * @param string $name
+     * @param array $definition
+     * @return $this
+     */
+    public function addFilter(string $name, array $definition = []) {}
+
+    /**
+     * @param string $stack
+     * @param string $name
+     * @param array $definition
+     * @return $this
+     */
+    public function addButton(string $stack, string $name, array $definition = []) {}
+
+    /**
+     * @return array
+     */
+    public function getColumns() {}
+
+    /**
+     * @return array
+     */
+    public function getFields() {}
+
+    /**
+     * @return array
+     */
+    public function getFilters() {}
+
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    public function get(string $key) {}
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
+    public function set(string $key, mixed $value) {}
+
+    /**
+     * @param array $array
+     * @return $this
+     */
+    public function setFromArray(array $array) {}
+
+    /**
+     * @param string $modelName
+     * @return $this
+     */
+    public function setModel(string $modelName) {}
+
+    /**
+     * @param string $routeName
+     * @return $this
+     */
+    public function setRoute(string $routeName) {}
+
+    /**
+     * @param string $entityName
+     * @return $this
+     */
+    public function setEntityNameStrings(string $entityName) {}
+
+    /**
+     * @param array $settings
+     * @return void
+     */
+    public function applyConfigurationFromSettings(array $settings) {}
+
+    /**
+     * @param string $buttonName
+     * @return string
+     */
+    public function getButtonKey(string $buttonName) {}
+
+    /**
+     * @param string $fromStack
+     * @param string $toStack
+     * @param string $buttonName
+     * @return void
+     */
+    public function moveButton(string $fromStack, string $toStack, string $buttonName) {}
+
+    /**
+     * @param string $stack
+     * @param string $buttonName
+     * @return void
+     */
+    public function removeButton(string $stack, string $buttonName) {}
+
+    /**
+     * @param string $stack
+     * @return array
+     */
+    public function buttons(string $stack = 'line') {}
+
+    /**
+     * @param string $stack
+     * @param string $name
+     * @param array $definition
+     * @return void
+     */
+    public function addCrudButton(string $stack, string $name, array $definition) {}
+
+    /**
+     * @param string $stack
+     * @param string $name
+     * @param array $modifications
+     * @return void
+     */
+    public function modifyButton(string $stack, string $name, array $modifications) {}
+
+    /**
+     * @return \Illuminate\Http\Request
+     */
+    public function getRequest() {}
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function getCurrentEntry() {}
+
+    /**
+     * @param string $name
+     * @return \Backpack\CRUD\app\Library\CrudPanel\CrudField|null
+     */
+    public function field(string $name) {}
+}
