@@ -112,8 +112,11 @@ jobs:
       - name: Test Extension with Laravel Project
         run: |
           cd temp-app
+          # Create the directory structure for our extension
+          mkdir -p vendor/aazbeltran/laravel-backpack-phpstan-extension
+          
           # Copy our extension into the Laravel project for testing
-          cp -r "$GITHUB_WORKSPACE/src" vendor/aazbeltran/laravel-backpack-phpstan-extension/src
+          cp -r "$GITHUB_WORKSPACE/src" vendor/aazbeltran/laravel-backpack-phpstan-extension/
           cp "$GITHUB_WORKSPACE/extension.neon" vendor/aazbeltran/laravel-backpack-phpstan-extension/
           cp "$GITHUB_WORKSPACE/bootstrap.php" vendor/aazbeltran/laravel-backpack-phpstan-extension/
           cp -r "$GITHUB_WORKSPACE/stubs" vendor/aazbeltran/laravel-backpack-phpstan-extension/
