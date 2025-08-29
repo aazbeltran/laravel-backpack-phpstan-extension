@@ -15,6 +15,10 @@ jobs:
       matrix:
         php-version: ['8.1', '8.2', '8.3']
         phpstan-version: ['^1.10', '^2.0']
+        exclude:
+          # Exclude PHPStan 2.0 with PHP 8.1 due to dependency conflicts
+          - php-version: '8.1'
+            phpstan-version: '^2.0'
 
     name: PHP ${{ matrix.php-version }} - PHPStan ${{ matrix.phpstan-version }}
 
@@ -42,7 +46,8 @@ jobs:
         run: |
           # Install specific PHPStan version for matrix testing
           # Allow composer to update composer.lock in the runner to avoid mismatches
-          composer require "phpstan/phpstan:${{ matrix.phpstan-version }}" --dev
+          composer require "phpstan/phpstan:${{ matrix.phpstan-version }}" --no-update
+          composer update phpstan/phpstan --with-dependencies
           composer install --prefer-dist --no-progress
 
       - name: Run PHPUnit Tests
