@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2025-09-01
+
 ### Added
 - Initial release of Laravel Backpack PHPStan Extension
 - Static analysis support for CrudField magic methods
@@ -33,8 +35,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive stub files for static analysis
 - Bootstrap file for runtime helper registration
 - Modular architecture for extensibility
-
-## [1.0.0] - TBD
-
-### Added
-- First stable release
