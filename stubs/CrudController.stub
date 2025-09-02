@@ -20,6 +20,9 @@ abstract class CrudController extends Controller
     /** @var CrudPanel */
     public $crud;
 
+    /** @var array */
+    public $data = [];
+
     public function __construct()
     {
         // Initialize CRUD panel
@@ -151,5 +154,28 @@ abstract class CrudController extends Controller
     public function showDetailsRow(int $id): string
     {
         return '';
+    }
+
+    /**
+     * Setup methods for routing (can be static or instance)
+     */
+
+    /**
+     * @param string $controller
+     * @param string $routeName
+     * @param string $segment
+     * @return void
+     */
+    public function setupRoutes(string $controller, string $routeName, string $segment): void
+    {
+        // Setup routes
+    }
+
+    /**
+     * Search method with proper parameter handling
+     */
+    public function fetch(\Illuminate\Http\Request|array|string $request = null): \Illuminate\Http\JsonResponse|\Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Pagination\Paginator
+    {
+        return response()->json([]);
     }
 }

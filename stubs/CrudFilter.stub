@@ -149,6 +149,22 @@ class CrudFilter
     }
 
     /**
+     * Set select attribute
+     */
+    public function select_attribute(string $attribute): self
+    {
+        return $this;
+    }
+
+    /**
+     * Set when active condition
+     */
+    public function whenActive(mixed $condition): self
+    {
+        return $this;
+    }
+
+    /**
      * Save the filter to the CRUD panel
      */
     public function save(): self

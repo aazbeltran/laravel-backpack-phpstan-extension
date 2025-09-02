@@ -8,7 +8,12 @@ namespace Backpack\CRUD\app\Library\CrudPanel;
  * This stub provides type hints for the main CrudPanel class
  * to help PHPStan understand the dynamic nature of Backpack CRUD operations.
  */
-class CrudPanel
+    /**
+     * @param string|array $name
+     * @param array $definition
+     * @return \Backpack\CRUD\app\Library\CrudPanel\CrudColumn
+     */
+    public function column(string|array $name, array $definition = []) {}CrudPanel
 {
     public string $route;
     public string $entity_name;
@@ -24,11 +29,11 @@ class CrudPanel
     public \Illuminate\Http\Request $request;
 
     /**
-     * @param string $name
+     * @param string|array $name
      * @param array $definition
      * @return $this
      */
-    public function addField(string $name, array $definition = []) {}
+    public function addField(string|array $name, array $definition = []) {}
 
     /**
      * @param string|array $name
@@ -38,19 +43,21 @@ class CrudPanel
     public function addColumn(string|array $name, array $definition = []) {}
 
     /**
-     * @param string $name
-     * @param array $definition
+     * @param string|array $name
+     * @param array|string|bool|callable|null $definition
+     * @param array|string|bool|callable|null $fallback_definition
      * @return $this
      */
-    public function addFilter(string $name, array $definition = []) {}
+    public function addFilter(string|array $name, array|string|bool|callable|null $definition = [], mixed $fallback_definition = null) {}
 
     /**
      * @param string $stack
      * @param string $name
-     * @param array $definition
+     * @param array|string $definition
+     * @param string|null $position
      * @return $this
      */
-    public function addButton(string $stack, string $name, array $definition = []) {}
+    public function addButton(string $stack, string $name, array|string $definition = [], string $position = null) {}
 
     /**
      * @return array
@@ -100,9 +107,10 @@ class CrudPanel
 
     /**
      * @param string $entityName
+     * @param string|null $entityNamePlural
      * @return $this
      */
-    public function setEntityNameStrings(string $entityName) {}
+    public function setEntityNameStrings(string $entityName, string $entityNamePlural = null) {}
 
     /**
      * @param array $settings
@@ -164,10 +172,328 @@ class CrudPanel
     public function getCurrentEntry() {}
 
     /**
-     * @param string $name
+     * @param string|array $name
      * @return \Backpack\CRUD\app\Library\CrudPanel\CrudField|null
      */
-    public function field(string $name) {}
+    public function field(string|array $name) {}
+
+    /**
+     * Access Control Methods
+     */
+
+    /**
+     * @param array|string $operations
+     * @return $this
+     */
+    public function denyAccess(array|string $operations) {}
+
+    /**
+     * @param array|string $operations
+     * @return $this
+     */
+    public function allowAccess(array|string $operations) {}
+
+    /**
+     * @param string $operation
+     * @return void
+     * @throws \Backpack\CRUD\Exception\AccessDeniedException
+     */
+    public function hasAccessOrFail(string $operation) {}
+
+    /**
+     * Export and UI Methods
+     */
+
+    /**
+     * @return $this
+     */
+    public function enableExportButtons() {}
+
+    /**
+     * @return $this
+     */
+    public function disableExportButtons() {}
+
+    /**
+     * Column and Field Management
+     */
+
+    /**
+     * @param array $columns
+     * @return $this
+     */
+    public function addColumns(array $columns) {}
+
+    /**
+     * @param array $columns
+     * @return $this
+     */
+    public function setColumns(array $columns) {}
+
+    /**
+     * @param array $fields
+     * @return $this
+     */
+    public function addFields(array $fields) {}
+
+    /**
+     * @param string $name
+     * @param array $modifications
+     * @return $this
+     */
+    public function modifyColumn(string $name, array $modifications) {}
+
+    /**
+     * @param string $name
+     * @param array $modifications
+     * @return $this
+     */
+    public function modifyField(string $name, array $modifications) {}
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function removeField(string $name) {}
+
+    /**
+     * @param string $name
+     * @param array $definition
+     * @return \Backpack\CRUD\app\Library\CrudPanel\CrudColumn
+     */
+    public function column(string $name, array $definition = []) {}
+
+    /**
+     * @param string $type
+     * @return $this
+     */
+    public function type(string $type) {}
+
+    /**
+     * @param array|string $values
+     * @return $this
+     */
+    public function values(array|string $values) {}
+
+    /**
+     * @param string $method
+     * @return $this
+     */
+    public function method(string $method) {}
+
+    /**
+     * Query and Data Methods
+     */
+
+    /**
+     * @param string|\Closure $clause
+     * @param mixed ...$parameters
+     * @return $this
+     */
+    public function addClause(string|\Closure $clause, mixed ...$parameters) {}
+
+    /**
+     * @param string $column
+     * @param string $direction
+     * @return $this
+     */
+    public function orderBy(string $column, string $direction = 'asc') {}
+
+    /**
+     * @param string $filterName
+     * @param mixed $value
+     * @return $this
+     */
+    public function filter(string $filterName, mixed $value = null) {}
+
+    /**
+     * Validation Methods
+     */
+
+    /**
+     * @param array|string $validationRules
+     * @param array $validationMessages
+     * @param array $validationAttributes
+     * @return $this
+     */
+    public function setValidation(array|string $validationRules, array $validationMessages = [], array $validationAttributes = []) {}
+
+    /**
+     * @return $this
+     */
+    public function unsetValidation() {}
+
+    /**
+     * @return void
+     */
+    public function validateRequest() {}
+
+    /**
+     * Database Integration
+     */
+
+    /**
+     * @return $this
+     */
+    public function setFromDb() {}
+
+    /**
+     * @param \Closure|null $callback
+     * @return $this
+     */
+    public function setLabeller(\Closure $callback = null) {}
+
+    /**
+     * Operation and Settings Methods
+     */
+
+    /**
+     * @param string $operation
+     * @return $this
+     */
+    public function setOperation(string $operation, array $operation_settings = []) {}
+
+    /**
+     * @param string $operation
+     * @return $this
+     */
+    public function operation(string $operation, array $operation_settings = []) {}
+
+    /**
+     * @param string $setting
+     * @param mixed $value
+     * @return $this
+     */
+    public function setOperationSetting(string $setting, mixed $value) {}
+
+    /**
+     * @param string $setting
+     * @param mixed $defaultValue
+     * @return mixed
+     */
+    public function operationSetting(string $setting, mixed $defaultValue = null) {}
+
+    /**
+     * @return $this
+     */
+    public function loadDefaultOperationSettingsFromConfig() {}
+
+    /**
+     * Pagination and Display Methods
+     */
+
+    /**
+     * @param int $length
+     * @return $this
+     */
+    public function setDefaultPageLength(int $length) {}
+
+    /**
+     * @param array $menu
+     * @return $this
+     */
+    public function setPageLengthMenu(array $menu) {}
+
+    /**
+     * Entry Management
+     */
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function getEntry(int $id) {}
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function getEntryWithLocale(int $id) {}
+
+    /**
+     * @return int
+     */
+    public function getCurrentEntryId() {}
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getEntries() {}
+
+    /**
+     * @return string
+     */
+    public function getModel() {}
+
+    /**
+     * @return string
+     */
+    public function getTitle() {}
+
+    /**
+     * Field and Form Methods
+     */
+
+    /**
+     * @return array
+     */
+    public function getAllFieldNames() {}
+
+    /**
+     * @return array
+     */
+    public function getUpdateFields() {}
+
+    /**
+     * @param array $fields
+     * @return $this
+     */
+    public function orderFields(array $fields) {}
+
+    /**
+     * Request and Save Actions
+     */
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return $this
+     */
+    public function setRequest(\Illuminate\Http\Request $request) {}
+
+    /**
+     * @return string
+     */
+    public function getSaveAction() {}
+
+    /**
+     * @param array $saveAction
+     * @return $this
+     */
+    public function addSaveAction(array $saveAction) {}
+
+    /**
+     * @return $this
+     */
+    public function setupDefaultSaveActions() {}
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function performSaveAction(\Illuminate\Http\Request $request) {}
+
+    /**
+     * Button Management
+     */
+
+    /**
+     * @param string $view
+     * @param string $stack
+     * @param string $name
+     * @param string $position
+     * @return $this
+     */
+    public function addButtonFromView(string $view, string $stack = 'line', string $name = null, string $position = 'end') {}
 
     /**
      * Pro package operations - clone, fetch, inlineCreate

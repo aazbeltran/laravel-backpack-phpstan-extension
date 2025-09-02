@@ -8,7 +8,7 @@ namespace Backpack\Pro\Http\Controllers\Operations;
  * @method void setupFetchDefaults()
  * @method void setupFetchOperation()
  * @method \Illuminate\Http\JsonResponse fetchEntries()
- * @method \Illuminate\Http\JsonResponse fetch(\Illuminate\Http\Request $request)
+ * @method \Illuminate\Http\JsonResponse|\Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Pagination\Paginator fetch(\Illuminate\Http\Request|array|string $request)
  */
 trait FetchOperation
 {
